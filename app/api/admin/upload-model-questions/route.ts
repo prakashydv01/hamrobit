@@ -51,11 +51,10 @@ export async function POST(req: Request) {
 
     // ===== CONVERT FILE =====
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
 
     // ===== CREATE UPLOAD =====
     const upload = await environment.createUpload({
-      file: buffer,
+      file: arrayBuffer,
     });
 
     // ===== CREATE ASSET =====

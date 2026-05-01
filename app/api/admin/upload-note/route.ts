@@ -180,7 +180,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ message: "File missing" }, { status: 400 });
       }
 
-      const buffer = Buffer.from(await file.arrayBuffer());
+      const arrayBuffer = await file.arrayBuffer();
 
       let asset = await environment.createAssetFromFiles({
         fields: {
@@ -189,9 +189,10 @@ export async function POST(req: Request) {
             "en-US": {
               contentType: file.type,
               fileName: file.name,
-              file: buffer,
+              file: arrayBuffer,
             },
           },
+          description: {}
         },
       });
 

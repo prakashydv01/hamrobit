@@ -24,7 +24,8 @@ import {
   Minimize2
 } from "lucide-react";
 
-export default function Page(props: any) {
+type Params = { semester: string; subject: string };
+export default function Page(props: { params: Promise<Params> }) {
   const params = use(props.params);
   const semester = Number(params.semester);
   const subject = decodeURIComponent(params.subject);
@@ -51,7 +52,7 @@ export default function Page(props: any) {
           content_type: "hamrobit",
           "fields.semester": semester,
           "fields.subject": subject,
-          order: "sys.createdAt",
+          order: ["sys.createdAt"],
         });
         setChapters(res.items);
       } catch (error) {
